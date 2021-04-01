@@ -37,6 +37,7 @@ return function (App $app) {
             });
 
             $app->post("/member/add", function (Request $request, Response $response) {
+                $val = "Git test";
             });
         });
     });
