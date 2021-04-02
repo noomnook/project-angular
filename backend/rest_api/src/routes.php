@@ -31,13 +31,26 @@ return function (App $app) {
                     echo "Error: " . $e->getMessage();
                 } catch (Exception $e) {
                     echo "Error: " . $e->getMessage();
-                }finally{
+                } finally {
                     $member->clearConn();
                 }
             });
 
             $app->post("/member/add", function (Request $request, Response $response) {
-                $val = "Git test v3";
+                try {
+                    $member = new Member();
+                    $data = $member->memberAdd($request);
+                    $response = $response->withHeader("Content-Type", "application/json");
+                    $response = $response->withStatus(200, "OK");
+                    $response = $response->getBody()->write(json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK | JSON_PRETTY_PRINT));
+                    return $response;
+                } catch (PDOException $e) {
+                    echo "Error: " . $e->getMessage();
+                } catch (Exception $e) {
+                    echo "Error: " . $e->getMessage();
+                } finally {
+                    $member->clearConn();
+                }
             });
         });
     });
