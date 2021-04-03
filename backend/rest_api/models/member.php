@@ -76,4 +76,42 @@ class Member
             echo "Error: " . $e->getMessage();
         }
     }
+
+    public function memberUpdate($request)
+    {
+        $memberid = $request->getParam("member_id");
+        $name = $request->getParam("name");
+        $datetime = new DateTime();
+        $datetime_format = $datetime->format("Y-m-d H:s:i");
+
+        try {
+            $sql = "UPDATE member SET member_name  = :member_name, member_datetime = :member_datetime 
+            WHERE member_id = :member_id";
+            $stmt = $this->db->pdoQuery()->prepare($sql);
+            $stmt->bindParam(":member_name", $name);
+            $stmt->bindParam(":member_datetime", $datetime_format);
+            $stmt->bindParam(":member_id", $memberid);
+            $result = $stmt->execute();
+            if ($result) {
+                $date["status"] = "Your account has been successfully updated.";
+            } else {
+                $data["status"] = "Error: Your account cannot to be updated at this time. Please try again later.";
+            }
+            return $date;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function memberDelete($request)
+    {
+        $memberid = $request->getParam("member_id");
+        try{
+            $sql = "DELETE FROM member WHERE member_id = :member_id";
+            $stmt = $this->db->pdoQuery()->prepare($sql);
+            $stmt->bindParam(":member_id", $memberid);
+        }catch(PDOException $e){
+            echo "Error: ".$e->getMessage();
+        }
+    }
 }
