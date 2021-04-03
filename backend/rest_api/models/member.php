@@ -19,7 +19,24 @@ class Member
             $sql = "SELECT * FROM member;";
             $stmt = $this->db->pdoQuery()->prepare($sql);
             $stmt->execute();
-            $data = $stmt->fetchAll();
+            $query = $stmt->fetchAll();
+            $data = $query;
+            return $data;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function memberDetail($request)
+    {
+        try {
+            $memberid = $request->getAttribute("member_id");
+            $sql = "SELECT * FROM member WHERE member_id = :member_id";
+            $stmt = $this->db->pdoQuery()->prepare($sql);
+            $stmt->bindParam(":member_id", $memberid);
+            $stmt->execute();
+            $query = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $data = $query;
             return $data;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
