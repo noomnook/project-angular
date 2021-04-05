@@ -118,7 +118,7 @@ class Member
             }
             return $data;
         } catch (PDOException $e) {
-            echo "Error2: " . $e->getMessage();
+            echo "Error3: " . $e->getMessage();
         }
     }
 }
