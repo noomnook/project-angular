@@ -88,7 +88,20 @@ return function (App $app) {
             });
 
             $app->post("/member/delete", function (Request $request, Response $response) {
-                
+                try {
+                    $member = new Member();
+                    $data = $member->memberDelete($request);
+                    $response = $response->withHeader("Content-Type", "application/json");
+                    $response = $response->withStatus(200, "OK");
+                    $response = $response->getBody()->write($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK | JSON_PRETTY_PRINT);
+                    return $response;
+                } catch (PDOException $e) {
+                    echo "Error: " . $e->getMessage();
+                } catch (Exception $e) {
+                    echo "Error: " . $e->getMessage();
+                } finally {
+                    $member->clearConn();
+                }
             });
         });
     });
