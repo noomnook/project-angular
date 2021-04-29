@@ -20,7 +20,7 @@
                     <td>{{member.member_name}}</td>
                     <td>{{member.member_datetime}}</td>
                     <td class="text-center">
-                        <button class="btn btn-sm btn-primary mx-2" [routerLink]="['/edit-member']">Edit</button>
+                        <button class="btn btn-sm btn-primary mx-2" routerLink="/member-detail/{{member.member_id}}">Edit</button>
                         <button class="btn btn-sm btn-danger"
                             (click)="deleteMember(member.member_id, i)">Delete</button>
                     </td>

@@ -5,8 +5,10 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 // https://medium.com/lazy-dev/%E0%B8%9B%E0%B8%B1%E0%B8%8D%E0%B8%AB%E0%B8%B2%E0%B8%99%E0%B9%88%E0%B8%B2%E0%B8%9B%E0%B8%A7%E0%B8%94%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B8%82%E0%B8%AD%E0%B8%87-no-access-control-allow-origin-1e3d24932d9b
-// เปรียบเสมือนเป็น server ที่พยายามเรียก server
+// เปรียบเสมือนเป็น server ตัวเอง ที่พยายามเรียก server ตัวเอง
 header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: *');
+
 
 require_once('../models/member.php');
 

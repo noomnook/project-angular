@@ -20,9 +20,9 @@ export class MemberDetailComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private memberService: MemberService
   ) {
-    this.getId = this.activateRoute.snapshot.paramMap.get('id');
+    this.getId = this.activateRoute.snapshot.paramMap.get('memid');
 
-    this.memberService.getMember(this.getId).subscribe((res) => {
+    this.memberService.getMember(this.getId).subscribe(res => {
       this.updateForm.setValue({
         em_name: res['member_name'],
         em_datetime: res['member_datetime']

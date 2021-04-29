@@ -31,6 +31,7 @@ class Member
     {
         try {
             $memberid = $request->getAttribute("member_id");
+            // $memberid = $request->getArgument("member_id");
             $sql = "SELECT * FROM member WHERE member_id = :member_id";
             $stmt = $this->db->pdoQuery()->prepare($sql);
             $stmt->bindParam(":member_id", $memberid);
