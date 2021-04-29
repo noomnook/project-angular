@@ -4,6 +4,10 @@ use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
+// https://medium.com/lazy-dev/%E0%B8%9B%E0%B8%B1%E0%B8%8D%E0%B8%AB%E0%B8%B2%E0%B8%99%E0%B9%88%E0%B8%B2%E0%B8%9B%E0%B8%A7%E0%B8%94%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B8%82%E0%B8%AD%E0%B8%87-no-access-control-allow-origin-1e3d24932d9b
+// เปรียบเสมือนเป็น server ที่พยายามเรียก server
+header('Access-Control-Allow-Origin: *');
+
 require_once('../models/member.php');
 
 return function (App $app) {
@@ -70,7 +74,7 @@ return function (App $app) {
                 }
             });
 
-            $app->post("/member/update", function (Request $request, Response $response) {
+            $app->post("/member/update/{member_id}", function (Request $request, Response $response) {
                 try {
                     $member = new Member();
                     $data = $member->memberUpdate($request);
@@ -87,7 +91,7 @@ return function (App $app) {
                 }
             });
 
-            $app->post("/member/delete", function (Request $request, Response $response) {
+            $app->post("/member/delete/{member_id}", function (Request $request, Response $response) {
                 try {
                     $member = new Member();
                     $data = $member->memberDelete($request);

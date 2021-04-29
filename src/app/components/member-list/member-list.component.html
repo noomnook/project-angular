@@ -1,0 +1,31 @@
+<div class="container">
+    <div
+        class="d-flex justify-content between flex-warp flex-md-nowarp align-items-center pt-2 pb-2 mb-3 border-bottom">
+        <h1>Member List</h1>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Datetime</th>
+                    <th class="text-center" scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let member of Members; let i = index">
+                    <th scope="row">{{member.member_id}}</th>
+                    <td>{{member.member_name}}</td>
+                    <td>{{member.member_datetime}}</td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-primary mx-2" [routerLink]="['/edit-member']">Edit</button>
+                        <button class="btn btn-sm btn-danger"
+                            (click)="deleteMember(member.member_id, i)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
