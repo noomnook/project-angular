@@ -28,37 +28,37 @@ export class MemberService {
   }
 
   // Get all object
-  getMembers(){
+  getMembers() {
     let members_data = this.httpClient.get(`${this.REST_API}`);
     return members_data;
   }
 
   // Get single obkect
-  getMember(member_id: any): Observable<any>{
+  getMember(member_id: any): Observable<any> {
     let API_URL = `${this.REST_API}/${member_id}`;
-    return this.httpClient.get(API_URL, {headers: this.httpHeaders}).pipe(map((res:any) => {
+    return this.httpClient.get(API_URL, { headers: this.httpHeaders }).pipe(map((res: any) => {
       return res || {}
     }),
-    catchError(this.handleError)
+      catchError(this.handleError)
     )
   }
 
   // Update
-  updateMember(member_id:any, data:any): Observable<any> {
+  updateMember(member_id: any, data: any): Observable<any> {
     let API_URL = `${this.REST_API}/update/${member_id}`;
-    return this.httpClient.put(API_URL, data, {headers: this.httpHeaders})
-    .pipe(
-      catchError(this.handleError)
-    )
+    return this.httpClient.put(API_URL, data, { headers: this.httpHeaders })
+      .pipe(
+        catchError(this.handleError)
+      )
   }
 
   // Delete
-  deleteMember(member_id:any): Observable<any>{
+  deleteMember(member_id: any): Observable<any> {
     let API_URL = `${this.REST_API}/delete/${member_id}`;
-    return this.httpClient.delete(API_URL, {headers: this.httpHeaders})
-    .pipe(
-      catchError(this.handleError)
-    )
+    return this.httpClient.delete(API_URL, { headers: this.httpHeaders })
+      .pipe(
+        catchError(this.handleError)
+      )
   }
 
   // Make handleError method customize
@@ -66,7 +66,7 @@ export class MemberService {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Handle client error
-      errorMessage = error.error.message;      
+      errorMessage = error.error.message;
     } else {
       // Handle server error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;

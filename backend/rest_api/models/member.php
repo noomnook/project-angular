@@ -48,7 +48,7 @@ class Member
     {
         $datetime = new DateTime();
         $datetime_format = $datetime->format('Y-m-d H:s:i');
-        $name = $request->getParam("name");
+        $name = $request->getParam("m_name");
 
         try {
             $sql = "SELECT * FROM member WHERE member_name = :name";
@@ -107,6 +107,7 @@ class Member
     public function memberDelete($request)
     {
         $memberid = $request->getParam("member_id");
+        // $memberid = $request->getAttribute("member_id");
         try {
             $sql = "DELETE FROM member WHERE member_id = :member_id";
             $stmt = $this->db->pdoQuery()->prepare($sql);
@@ -119,7 +120,7 @@ class Member
             }
             return $data;
         } catch (PDOException $e) {
-            echo "Error3: " . $e->getMessage();
+            echo "Error: " . $e->getMessage();
         }
     }
 }

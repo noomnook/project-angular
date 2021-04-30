@@ -1,5 +1,6 @@
 <?php
 
+use Prophecy\Argument;
 use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -8,6 +9,7 @@ use Slim\Http\Response;
 // เปรียบเสมือนเป็น server ตัวเอง ที่พยายามเรียก server ตัวเอง
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
+header('Access-Control-Allow-Methods: *');
 
 
 require_once('../models/member.php');
@@ -93,7 +95,7 @@ return function (App $app) {
                 }
             });
 
-            $app->post("/member/delete/{member_id}", function (Request $request, Response $response) {
+            $app->delete("/member/delete/{member_id}", function ($request, $response, $args) {
                 try {
                     $member = new Member();
                     $data = $member->memberDelete($request);
