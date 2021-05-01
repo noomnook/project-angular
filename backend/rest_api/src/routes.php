@@ -95,14 +95,14 @@ return function (App $app) {
                 }
             });
 
-            $app->delete("/member/delete/{member_id}", function ($request, $response, $args) {
+            $app->delete("/member/delete/{member_id}", function (Request $request, Response $response) {
                 try {
                     $member = new Member();
                     $data = $member->memberDelete($request);
                     $response = $response->withHeader("Content-Type", "application/json");
                     $response = $response->withStatus(200, "OK");
-                    $response = $response->getBody()->write($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK | JSON_PRETTY_PRINT);
-                    return $response;
+                    $response = $response->getBody()->write(json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK | JSON_PRETTY_PRINT));
+                    return $response;                    
                 } catch (PDOException $e) {
                     echo "Error: " . $e->getMessage();
                 } catch (Exception $e) {

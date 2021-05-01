@@ -106,17 +106,19 @@ class Member
 
     public function memberDelete($request)
     {
-        $memberid = $request->getParam("member_id");
-        // $memberid = $request->getAttribute("member_id");
+        // $memberid = $request->getParam("member_id");
+        $memberid = $request->getAttribute("member_id");
         try {
             $sql = "DELETE FROM member WHERE member_id = :member_id";
             $stmt = $this->db->pdoQuery()->prepare($sql);
             $stmt->bindParam(":member_id", $memberid);
             $result = $stmt->execute();
             if ($result) {
-                $data["status"] = "Your account has been succussful delete.";
+                $data["status"] = "suceess";
+                $data["text"] = "Your account has been succussful delete.";                
             } else {
-                $data["status"] = "Error: Your account cannot to be deelte at this time,Please try again later.";
+                $data["status"] = "fail";
+                $data["text"] = "Error: Your account cannot to be deelte at this time,Please try again later.";
             }
             return $data;
         } catch (PDOException $e) {

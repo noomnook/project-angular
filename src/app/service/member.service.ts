@@ -3,9 +3,9 @@ import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
-export class Member {
-  member_name!: String;
-}
+// export class Member {
+//   member_name!: String;
+// }
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class MemberService {
 
 
   // Add member
-  addMember(data: Member): Observable<any> {
+  addMember(data: any): Observable<any> {
     let API_URL = `${this.REST_API}/add`;
     return this.httpClient.post(API_URL, data).pipe(catchError(this.handleError))
   }
@@ -54,11 +54,12 @@ export class MemberService {
 
   // Delete
   deleteMember(member_id: any): Observable<any> {
-    let API_URL = `${this.REST_API}/delete/${member_id}`;
-    return this.httpClient.delete(API_URL, { headers: this.httpHeaders })
+    let API_URL = `${this.REST_API}/delete/${member_id}`;    
+    let result = this.httpClient.delete(API_URL, { headers: this.httpHeaders })
       .pipe(
         catchError(this.handleError)
-      )
+      )    
+    return result;
   }
 
   // Make handleError method customize
