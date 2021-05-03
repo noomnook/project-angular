@@ -28,8 +28,8 @@ export class AddMemberComponent implements OnInit {
 
   onSubmit(): any {
     this.memberService.addMember(this.memberForm.value)
-      .subscribe(() => {
-        console.log("Data added successfully");
+      .subscribe((res) => {
+        console.log(res);
         this.ngZone.run(() => this.router.navigateByUrl('/member-list'))
       }, (err) => {
         console.log(err);

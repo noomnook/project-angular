@@ -78,7 +78,7 @@ return function (App $app) {
                 }
             });
 
-            $app->post("/member/update/{member_id}", function (Request $request, Response $response) {
+            $app->put("/member/update/{member_id}", function (Request $request, Response $response) {
                 try {
                     $member = new Member();
                     $data = $member->memberUpdate($request);

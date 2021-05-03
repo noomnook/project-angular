@@ -46,10 +46,11 @@ export class MemberService {
   // Update
   updateMember(member_id: any, data: any): Observable<any> {
     let API_URL = `${this.REST_API}/update/${member_id}`;
-    return this.httpClient.put(API_URL, data, { headers: this.httpHeaders })
+    let result = this.httpClient.put(API_URL, data, { headers: this.httpHeaders })
       .pipe(
         catchError(this.handleError)
-      )
+      )      
+    return result;
   }
 
   // Delete

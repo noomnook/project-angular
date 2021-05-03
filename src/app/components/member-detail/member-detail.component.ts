@@ -20,27 +20,26 @@ export class MemberDetailComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private memberService: MemberService
   ) {
-    this.getId = this.activateRoute.snapshot.paramMap.get('memid');
+    this.getId = this.activateRoute.snapshot.paramMap.get('member_id');
+
+    this.updateForm = this.formBuilder.group({
+      em_name: ['']
+    })
 
     this.memberService.getMember(this.getId).subscribe(res => {
       this.updateForm.setValue({
-        em_name: res['member_name'],
-        em_datetime: res['member_datetime']
+        em_name: res['member_name']        
       })
     })
 
-    this.updateForm = this.formBuilder.group({
-      em_name: [''],
-      em_datetime: ['']
-    })
   }
 
   ngOnInit(): void {
   }
 
   onUpdate(): any {
-    this.memberService.updateMember(this.getId, this.updateForm.value).subscribe(() => {
-      console.log('Data updated successfully');
+    this.memberService.updateMember(this.getId, this.updateForm.value).subscribe((res) => {
+      console.log(res);
       this.ngZone.run(() => this.router.navigateByUrl('/member-list'))
     }, (err) => {
       console.log(err);

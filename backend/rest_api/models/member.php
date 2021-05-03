@@ -1,5 +1,6 @@
 <?php
 require_once('../lib/dbconnection.php');
+date_default_timezone_set('Asia/Bangkok');
 class Member
 {
     private $db;
@@ -67,9 +68,11 @@ class Member
                 $stmt->execute();
                 $result = $this->db->pdoQuery()->lastInsertId();
                 if ($result) {
-                    $data["status"] = "Your account has been successfully created.";
+                    $data["status"] = "suceess";
+                    $data["text"] = "Your account has been successfully created.";
                 } else {
-                    $data["status"] = "Error: Your account cannot be create at this time. Please try again later.";
+                    $data["status"] = "fail";
+                    $data["text"] = "Error: Your account cannot be create at this time. Please try again later.";
                 }
             }
             return $data;
@@ -80,8 +83,8 @@ class Member
 
     public function memberUpdate($request)
     {
-        $memberid = $request->getParam("member_id");
-        $name = $request->getParam("name");
+        $memberid = $request->getAttribute("member_id");
+        $name = $request->getParam("em_name");
         $datetime = new DateTime();
         $datetime_format = $datetime->format("Y-m-d H:s:i");
 
@@ -94,11 +97,13 @@ class Member
             $stmt->bindParam(":member_id", $memberid);
             $result = $stmt->execute();
             if ($result) {
-                $date["status"] = "Your account has been successfully updated.";
+                $data["status"] = "suceess";
+                $data["text"] = "Your account has been successfully updated.";
             } else {
-                $data["status"] = "Error: Your account cannot to be updated at this time. Please try again later.";
+                $data["status"] = "fail";
+                $data["text"] = "Error: Your account cannot to be updated at this time. Please try again later.";
             }
-            return $date;
+            return $data;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
