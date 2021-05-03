@@ -7,9 +7,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
   - lowcost for starter learning
 - Mysql OR MariaDB
 
-For first run 
-  npm -i
-enjoy
+
+First Run
+    
+    Angular
+      npm i
+    Silm Framework
+      composer require slim/slim:3.*
+    
+    -enjoy
 
 ## Development server
 
