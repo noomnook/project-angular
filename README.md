@@ -3,6 +3,8 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.6.
 - Frontend Angular CLI
 - Backend Slim Framework PHP RestAPI
+  - For server wampserver xampp PHP hosting at can't run Nodejs
+  - lowcost for starter learning
 - Mysql OR MariaDB
 
 ## Development server
