@@ -13,7 +13,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 export class MemberService {
 
   // Slim Framework API
-  REST_API: string = 'http://localhost/angular/project-angular/backend/rest_api/public/api/v1/member';
+  REST_API: string = 'http://localhost/angular/project-angular-crud/backend/rest_api/public/api/v1/member';
 
   // Http Header
   httpHeaders = new HttpHeaders().set("Content-Type", "application/json");
